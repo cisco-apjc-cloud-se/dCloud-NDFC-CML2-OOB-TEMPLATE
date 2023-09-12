@@ -4,10 +4,10 @@ nodes:
     configuration: |2-
 
       !Command: show running-config
-      !Running configuration last done at: Thu Aug  3 04:41:12 2023
-      !Time: Thu Aug  3 04:41:12 2023
+      !Running configuration last done at: Tue Sep 12 02:17:07 2023
+      !Time: Tue Sep 12 02:17:08 2023
 
-      version 10.3(1) Bios:version
+      version 10.4(1) Bios:version
       hostname OOB-MGMT
       vdc OOB-MGMT id 1
         limit-resource vlan minimum 16 maximum 4094
@@ -35,7 +35,7 @@ nodes:
       rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
 
       ip route 0.0.0.0/0 198.18.128.1
-      vlan 1,100-101
+      vlan 1,101
 
       service dhcp
       ip dhcp relay
@@ -45,15 +45,17 @@ nodes:
 
       interface Vlan1
 
-      interface Vlan100
+      interface Vlan101
         description *** 1st OOB Management Network ***
-        ip address 198.19.100.1/24
+        no shutdown
+        ip address 198.18.101.1/24
         ip router ospf lab area 0.0.0.0
         ip dhcp relay address 198.18.1.100
 
-      interface Vlan101
+      interface Vlan102
         description *** 2nd OOB Management Network ***
-        ip address 198.19.101.1/24
+        no shutdown
+        ip address 198.18.102.1/24
         ip router ospf lab area 0.0.0.0
         ip dhcp relay address 198.18.1.100
 
@@ -199,7 +201,6 @@ nodes:
         exec-timeout 0
       line vty
         exec-timeout 0
-      boot nxos bootflash:/nxos64-cs.10.3.1.F.bin
       router ospf lab
         passive-interface default
 
